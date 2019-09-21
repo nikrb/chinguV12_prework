@@ -140,7 +140,7 @@ function pagination(){
 // Create StyleSheet URL
 function createStyleSheet(){
   let apiURL = [];
-  apiURL.push('http://fonts.googleapis.com/css?family=');
+  apiURL.push('https://fonts.googleapis.com/css?family=');
 
   if(currentFonts.length > 1){
     for(let i = 0; i < currentFonts.length; i++){
