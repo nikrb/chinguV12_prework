@@ -250,10 +250,8 @@ let lazyLoadOptions = {
   threshold: [0]
 }
 
-
 function loadMoreFonts(entry) {
-  let div = document.querySelector("footer");
-
+  let div = document.querySelector("#lazy-load");
   if(whichArray == 'fontsData'){
     (entry[0].isIntersecting) && (currentStartingIndex < fontsData.length - 1) ? setDisplay() : null;
   } else {
@@ -263,10 +261,9 @@ function loadMoreFonts(entry) {
   }
 }
 
-
 function initiateLazyLoading() {
   lazyLoadObserver = new IntersectionObserver(loadMoreFonts, lazyLoadOptions);
-  lazyLoadObserver.observe(document.querySelector("footer"));
+  lazyLoadObserver.observe(document.querySelector("#lazy-load"));
 };
 
 
