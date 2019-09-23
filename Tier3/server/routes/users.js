@@ -8,7 +8,7 @@ const { check, validationResult } = require("express-validator/check");
 
 let loginValidations = [
   check("email").isEmail(),
-  check("password").isLength({ min: 5 })
+  check("password").isLength({ min: 4 })
 ];
 
 let signUpValidation = [
@@ -17,45 +17,8 @@ let signUpValidation = [
   check("name").isLength({ min: 5, max: 15 })
 ];
 
-//function to check if the user is already logged in or not
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  } else {
-    console.log("You are not logged in!");
-    res.statusCode = 401;
-    res.setHeader("Content-Type", "application/json");
-    res.json({ success: false, status: "You are not logged in!" });
-  }
-}
-
-//Default get page:- Only for demo purpose
-router.get("/", async function(req, res, next) {
-  res.statusCode = 200;
-  res.setHeader("Content-Type", "application/json");
-  res.json({
-    success: true,
-    status: "You are in / page!"
-  });
-});
-
-//Sends the info of currently logged in user
-router.get("/get-user", isLoggedIn, async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id);
-    if (user) {
-      res.status(200).send(user);
-    } else {
-      res.status(400).send({ message: "The user does not exist" });
-    }
-  } catch (error) {
-    res.status(400).send({ message: "Some error occured" });
-  }
-});
-
 //Route for login:- uses passport local login strategy
 router.post("/login", loginValidations, async (req, res, next) => {
-  
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() });
@@ -66,7 +29,6 @@ router.post("/login", loginValidations, async (req, res, next) => {
   try {
     const user = await User.findOne({ "local.email": email });
     const errors = {};
-    console.log(user);
     if (!user) {
       errors.email = "User with provided email does not exist";
       return res.status(404).json(errors);
@@ -99,8 +61,6 @@ router.post("/signup", signUpValidation, async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() });
   }
-  console.log("Here");
-
   const { name, email, password } = req.body;
   try {
     const user = await User.findOne({ "local.email": email });

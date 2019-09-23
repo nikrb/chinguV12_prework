@@ -29,7 +29,8 @@ const corsOptions = {
   origin: ["*", "http://localhost:3000"], // List of host authorized make cors request. For cross origin cookies specific host should be given. (ex:"http://localhost:3000")
   credentials: true // Must enable for cross origin cookies.
 };
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(morgan("dev"));
 app.use(cookieParser());
