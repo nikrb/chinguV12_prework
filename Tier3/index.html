@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Google Fonts Clone</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700|Roboto&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/4d66f817b0.js"></script>
+  <link rel="stylesheet" href="normalize.css">
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div>
+        <span class="close">&times;</span>
+      </div>
+
+      <div id="login-modal" class="login-modal mt-5">
+        <h2 class="center-text modal-heading">Login to favfonts</h2>
+        <form onsubmit="login(event)">
+          <table class="text-center mt-2">
+            <tr class="mt-5">
+              <!-- <td>Email</td> -->
+              <td><input type="email" class="form-box" placeholder="Email" id="email_login" required /></td>
+            </tr>
+            <tr class="mt-5">
+              <!-- <td>Password</td> -->
+              <td><input type="password" class="form-box" placeholder="Password" id="password_login" required /></td>
+            </tr>
+          </table>
+          <div class="center-text mt-2">
+            <button class="login-btn">
+              Login
+            </button>
+          </div>
+        </form>
+        <p class="center-text mt-2 link-text" onclick="open_register_window(event)">Or register from here</p>
+      </div>
+
+      <div id="register-modal" class="register-modal mt-5">
+        <h2 class="center-text modal-heading">Register to favfonts</h2>
+        <form onsubmit="register(event)">
+          <table class="text-center mt-2">
+            <tr class="mt-5">
+              <td><input type="text" class="form-box" placeholder="Name*" id="name_register" required /></td>
+            </tr>
+            <tr class="mt-5">
+              <td><input type="email" class="form-box" placeholder="Email*" id="email_register" required /></td>
+            </tr>
+            <tr class="mt-5">
+              <td><input type="password" class="form-box" placeholder="Password*" id="password_register" required />
+              </td>
+            </tr>
+          </table>
+          <div class="center-text mt-2">
+            <button class="register-btn">
+              Register
+            </button>
+          </div>
+        </form>
+        <p class="center-text mt-2 link-text" onclick="open_login_window(event)">Go back to login</p>
+      </div>
+
+    </div>
+  </div>
+  <header>
+    <nav id="top-nav">
+      <h1>Google <span class="lighter">Fonts</span></h1>
+      <ul id="top-nav-ul">
+        <li id="signed-in">Signed in</li>
+        <li id="login-li-btn" onclick="open_login_window(event)">LOGIN</li>
+        <li>CATALOG</li>
+        <li>FEATURED</li>
+        <li>ARTICLES</li>
+        <li>ABOUT</li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <nav id="main-nav">
+      <input type="text" name="search-fonts" id="search-fonts" placeholder="Search fonts"
+        oninput="populateSearch(event)">
+      <input type="text" name="custom-text" id="custom-text" placeholder="Type something"
+        oninput="changeSampleText(event)">
+      <select id="font-size" onchange="changeFontSize(event)">
+        <option value="20">20px</option>
+        <option value="24">24px</option>
+        <option value="32" id="selected-font-size" selected>32px</option>
+        <option value="40">40px</option>
+      </select>
+      <div id="main-nav-adjust">
+        <div id="main-nav-color-picker">
+          <div id="black" onclick="changeColorMode('black')"></div>
+          <div id="white" onclick="changeColorMode('white')"></div>
+        </div>
+        <button type="button" name="main-nav-layout" id="main-nav-layout">
+          <i class="fas fa-border-all hide" id="grid-icon" onclick="toggleView(false)"></i>
+          <i class="fas fa-list-ul" id="list-icon" onclick="toggleView(false)"></i>
+        </button>
+        <button type="button" name="main-nav-reset" id="main-nav-reset" onclick="resetPage()">
+          <i class="fas fa-redo"></i>
+        </button>
+      </div>
+    </nav>
+
+    <section id="font-card-container">
+
+    </section>
+  </main>
+
+  <aside id="to-top">
+    <div>
+      <i class="fas fa-arrow-circle-up" onclick="scrollToTop()"></i>
+    </div>
+  </aside>
+
+  <footer>
+    <p>coded by jmwebDev | 2019 | Chingu Pre-Work Project</p>
+  </footer>
+
+  <aside id="lazy-load"></aside>
+
+  <script src="main.js" async defer></script>
+</body>
+
+</html>
