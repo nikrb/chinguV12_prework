@@ -1,3 +1,26 @@
+function saveFavourite(name) {
+	console.log('save favourite:', name);
+	let fav_endpoint = 'http://localhost:8080/api/favourites';
+	fetch(fav_endpoint, {
+		method: 'post',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify( { name })
+	})
+	.then( res => res.json())
+	.then(
+		results => console.log('fav result:', results)
+	);
+}
+function getFavourites() {
+	let fav_ep = "http://localhost:8080/api/favourites";
+	fetch(fav_ep)
+	.then( res => res.json())
+	.then( results => console.log('favourites list:', results));
+}
+
 // Change the font size of sample texts when the fontSize select is changed.
 function changeFontSize(event) {
 	let fontCards = document.querySelectorAll('.font-card-sample > p');
@@ -171,7 +194,7 @@ Here's what the div should look like:
   <div class="font-card-sample">
     <p style="font-family:Roboto">Then came the night of the first falling star.</p>
   </div>
-</div> 
+</div>
 */
 
 let fontCardContainer = document.querySelector('#font-card-container');
@@ -194,6 +217,9 @@ function createFontCard(name, sampleText) {
 	let addFont = document.createElement('p');
 	addFont.classList = 'add-font';
 	addFont.innerText = '+';
+	addFont.onclick = function(e) {
+		saveFavourite(name);
+	};
 
 	let fontCardSample = document.createElement('div');
 	fontCardSample.classList = 'font-card-sample';
@@ -378,7 +404,7 @@ function login(event) {
 			console.log(data);
 			if (data.status === success_code) {
 				document.cookie = 'auth=true; expires=Thu, 18 Dec 2022 12:00:00 UTC; path=/';
-				location.reload(); 
+				location.reload();
 			} else {
 				document.cookie = 'auth=; expires=Thu, 18 Dec 2012 12:00:00 UTC; path=/';
 				alert('Invalid login. Please try again later');
@@ -402,7 +428,7 @@ function register(event) {
 			console.log(data);
 			if (data.status === success_code) {
 				document.cookie = 'auth=true; expires=Thu, 18 Dec 2022 12:00:00 UTC; path=/';
-				location.reload(); 
+				location.reload();
 			} else {
 				document.cookie = 'auth=; expires=Thu, 18 Dec 2012 12:00:00 UTC; path=/';
 				alert('Invalid login. Please try again later');
